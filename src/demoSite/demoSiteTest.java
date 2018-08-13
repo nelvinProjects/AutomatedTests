@@ -39,15 +39,15 @@ class demoSiteTest {
 		element2.sendKeys("qauser");
 		element3.sendKeys("password");
 		element4.submit();
+		WebElement element5 = webDriver.findElement(By.linkText("4. Login"));
+		element5.click();
+		login();
 	}
 	
-	@Test
 	public void login() {
-		WebElement element5 = webDriver.findElement(By.linkText("4. Login"));
 		WebElement element6 = webDriver.findElement(By.name("username"));
 		WebElement element7 = webDriver.findElement(By.name("password"));
 		WebElement element8 = webDriver.findElement(By.name("FormsButton2"));
-		element5.click();
 		element6.sendKeys("qauser");
 		element7.sendKeys("password");
 		element8.submit();
