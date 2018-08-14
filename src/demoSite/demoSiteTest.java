@@ -57,19 +57,19 @@ class demoSiteTest {
 		WebElement element9 = webDriver.findElement(By.cssSelector("body > table > tbody > tr >"
 				+ " td.auto-style1 > big > blockquote > blockquote > font > center > b"));
 		System.out.println(element9.getText());
-		assertEquals("Login test","**Successful Login**", element9.getText());
+		assertEquals("**Successful Login**", element9.getText());
 	}
 	
 	@AfterAll
 	public static void clean() {
-		Timer timer = new Timer();
 		try {
-			timer.wait(500);
+			Thread.sleep(5000);
+			webDriver.quit();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		webDriver.close();
 	}
 
 }

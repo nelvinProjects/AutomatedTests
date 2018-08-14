@@ -2,12 +2,16 @@ package demoQA;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 class demoQATest {
@@ -23,7 +27,7 @@ class demoQATest {
 		webDriver.get("http://demoqa.com/");
 	}
 	
-	@Test
+//	@Test
 	public void registration() {
 		WebElement element = webDriver.findElement(By.cssSelector("#menu-item-374 > a"));
 		element.click();
@@ -71,6 +75,46 @@ class demoQATest {
 
 		WebElement submit = webDriver.findElement(By.xpath("//*[@id=\"pie_register\"]/li[14]/div/input"));
 		submit.submit();
+	}
+	
+//	@Test
+	public void droppable() {
+		WebElement navigation = webDriver.findElement(By.xpath("//*[@id=\"menu-item-141\"]/a"));
+		navigation.click();
+		
+		Actions actions = new Actions(webDriver);
+		WebElement dragObject = webDriver.findElement(By.id("draggableview"));
+		WebElement dragTo = webDriver.findElement(By.id("droppableview"));
+		actions.moveToElement(dragObject).clickAndHold().release(dragTo).perform();;
+		assertEquals("Dropped!", dragTo.getText(), "Text not match");
+	}
+	
+	@Test
+	public void selectable() {
+		webDriver.findElement(By.xpath("//*[@id=\"menu-item-142\"]/a")).click();
+		
+//		Select items = new Select(webDriver.findElement(By.id("selectable")));
+//		items.selectByIndex(3);
+//		items.selectByVisibleText("Item 6");
+//		items.selectByVisibleText("Item 3");
+		
+		List<WebElement> select = webDriver.findElements(By.className("ui-selectable"));
+		System.out.println(select.size());
+		for(WebElement item : select) {
+			System.out.println(item);
+		}
+	}
+	
+	@AfterAll
+	public static void clean() {
+		try {
+			Thread.sleep(5000);
+			webDriver.quit();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

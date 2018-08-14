@@ -2,6 +2,7 @@ package shoppingSite;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -31,5 +32,17 @@ class shoppingTest {
 		WebElement element2 = webDriver.findElement(By.linkText("Printed Chiffon Dress"));
 		assertTrue(element2.isDisplayed());
 		element2.click();
+	}
+	
+	@AfterAll
+	public static void clean() {
+		try {
+			Thread.sleep(5000);
+			webDriver.quit();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
